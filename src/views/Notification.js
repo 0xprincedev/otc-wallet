@@ -8,7 +8,8 @@ import {
   HStack,
   View,
 } from 'native-base'
-import { Roboto_400Regular } from '@expo-google-fonts/dev'
+
+let k = 0
 
 let notify = [
   {

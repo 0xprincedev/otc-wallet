@@ -26,7 +26,9 @@ const Stack = createNativeStackNavigator()
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Navigator
+        screenOptions={{ headerShown: false, animation: 'slide_from_right' }}
+      >
         <Stack.Screen name='Home' component={Home} />
         <Stack.Screen
           name='CreateWalletStepone'
@@ -47,6 +49,7 @@ const Navigation = () => {
         <Stack.Screen
           name='ImportWalletStepOne'
           component={ImportWalletStepOne}
+          options={{ animation: 'slide_from_bottom' }}
         />
         <Stack.Screen
           name='ImportWalletStepTwo'
@@ -55,9 +58,21 @@ const Navigation = () => {
         <Stack.Screen name='ImportWalletQrOne' component={ImportWalletQrOne} />
         <Stack.Screen name='ImportWalletQrTwo' component={ImportWalletQrTwo} />
         <Stack.Screen name='MyWallet' component={MyWallet} />
-        <Stack.Screen name='Notification' component={Notification} />
-        <Stack.Screen name='Portfolio' component={Portfolio} />
-        <Stack.Screen name='MyHub' component={MyHub} />
+        <Stack.Screen
+          name='Notification'
+          component={Notification}
+          options={{ animation: 'slide_from_bottom' }}
+        />
+        <Stack.Screen
+          name='Portfolio'
+          component={Portfolio}
+          options={{ animation: 'fade_from_bottom' }}
+        />
+        <Stack.Screen
+          name='MyHub'
+          component={MyHub}
+          options={{ animation: 'slide_from_bottom' }}
+        />
         <Stack.Screen name='Setting' component={Setting} />
         <Stack.Screen name='Support' component={Support} />
         <Stack.Screen name='Security' component={Security} />

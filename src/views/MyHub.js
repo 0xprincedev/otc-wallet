@@ -18,29 +18,27 @@ const MyHub = ({ navigation }) => {
   return (
     <NativeBaseProvider>
       <ScrollView backgroundColor='#000'>
-        <Pressable
-          onPress={() => navigation.goBack()}
-          width='20px'
-          mt='60px'
-          ml='30px'
-          height='20px'
-        >
-          <Image
-            source={require('../assets/image/close.png')}
-            size='20px'
-            alt='close'
-          />
-        </Pressable>
-        <Text
-          fontFamily={'Roboto_500Medium'}
-          fontSize={18}
-          lineHeight={21.48}
-          textAlign='center'
-          color='#fff'
-          mb='17px'
-        >
-          Your Hub
-        </Text>
+        <HStack mb='17px' mt='60px' justifyContent='center'>
+          <Pressable onPress={() => navigation.goBack()} height='20px'>
+            <Image
+              source={require('../assets/image/close.png')}
+              size='20px'
+              alt='close'
+            />
+          </Pressable>
+          <Text
+            fontFamily={'Roboto_500Medium'}
+            fontSize={18}
+            lineHeight={21.48}
+            textAlign='center'
+            color='#fff'
+            mr='60px'
+            ml='40px'
+            width='200px'
+          >
+            Your Hub
+          </Text>
+        </HStack>
         <Swiper loop={false} height='100%' showsPagination={false}>
           <Image
             source={require('../assets/image/buyotccard.png')}

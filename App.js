@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import AppLoading from 'expo-app-loading'
 import { NativeBaseProvider, Text } from 'native-base'
 
@@ -60,13 +60,23 @@ const App = () => {
     OpenSans_500Medium,
     OpenSans_400Regular,
   })
-  useEffect(() => {
-    setTimeout(() => {}, 1000)
-  }, [])
+  // const [state, setState] = useState(0)
+  // useEffect(() => {
+  //   if (!fontsLoaded) {
+  //     setState(++state)
+  //   }
+  // })
+  // useEffect(() => {
+  //   setTimeout(() => {}, 1000)
+  // }, [])
+
+  // if (!fontsLoaded) {
+  //   return <AppLoading />
+  // }
 
   return (
     <NativeBaseProvider>
-      {/* <StatusNav /> */}
+      <StatusNav />
       <Navigation />
     </NativeBaseProvider>
   )

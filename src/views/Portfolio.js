@@ -133,7 +133,7 @@ const Portfolio = ({ navigation }) => {
         <View mt='20px' ml='28px'>
           <PortSlider data={sliderData} />
         </View>
-        <HStack mx='20px' mt='30px'>
+        <HStack mx='30px' mt='30px'>
           <Text
             mr='auto'
             fontFamily={'Inter_500Medium'}
@@ -153,7 +153,7 @@ const Portfolio = ({ navigation }) => {
             Balance
           </Text>
         </HStack>
-        <View mx='20px' mt='21px'>
+        <View mx='30px' mt='21px'>
           {makeAsset()}
         </View>
       </ScrollView>

@@ -8,9 +8,9 @@ const StatusNav = () => {
   const [status, setStatus] = useState(0)
   useEffect(() => {
     StatusBar.setHidden(true)
-    setInterval(() => {
-      setStatus(++k)
-    }, 1000)
+    // setInterval(() => {
+    //   setStatus(++k)
+    // }, 1000)
   }, [])
 
   const fix = (num) => {
@@ -44,9 +44,9 @@ const StatusNav = () => {
 
   return (
     <>
-      <HStack height='30px' backgroundColor='#000' px='25px' py='5px'>
-        {makeBar()}
-      </HStack>
+      {/* <HStack height='30px' backgroundColor='#000' px='25px' py='5px'> */}
+      {/* {makeBar()} */}
+      {/* </HStack> */}
     </>
   )
 }
