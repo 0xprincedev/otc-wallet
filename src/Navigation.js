@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-// import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { createStackNavigator } from '@react-navigation/stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+// import { createStackNavigator } from '@react-navigation/stack'
 
 import Home from './views/Home'
 import CreateWalletStepOne from './views/CreateWallet/StepOne'
@@ -21,7 +21,7 @@ import Setting from './views/Setting'
 import Support from './views/Support'
 import Security from './views/Security'
 
-const Stack = createStackNavigator()
+const Stack = createNativeStackNavigator()
 
 const Navigation = () => {
   return (
