@@ -8,9 +8,9 @@ const StatusNav = () => {
   const [status, setStatus] = useState(0)
   useEffect(() => {
     StatusBar.setHidden(true)
-    // setInterval(() => {
-    //   setStatus(++k)
-    // }, 1000)
+    setInterval(() => {
+      setStatus(++k)
+    }, 1000)
   }, [])
 
   const fix = (num) => {
@@ -29,7 +29,7 @@ const StatusNav = () => {
     const time = (
       <Text
         color='#fff'
-        fontFamily={'Roboto_600SemiBold'}
+        fontFamily={'OpenSans_600SemiBold'}
         fontSize={16.54}
         lineHeight={19.74}
         mr='auto'
@@ -44,9 +44,12 @@ const StatusNav = () => {
 
   return (
     <>
-      {/* <HStack height='30px' backgroundColor='#000' px='25px' py='5px'> */}
-      {/* {makeBar()} */}
-      {/* </HStack> */}
+      <StatusBar
+      // barStyle='light-content'
+      // hidden={false}
+      // backgroundColor='#000f'
+      // translucent={true}
+      />
     </>
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   NativeBaseProvider,
   ScrollView,
@@ -42,7 +42,7 @@ const Home = ({ navigation }) => {
           The easiest and most secure digital wallet
         </Text>
         <Pressable
-          onPress={() => navigation.navigate('CreateWalletStepone')}
+          onPress={() => navigation.navigate('CreateWalletStepTwo')}
           mt='250px'
           mx='17px'
         >

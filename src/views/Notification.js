@@ -1,13 +1,17 @@
 import React from 'react'
+import { StyleSheet } from 'react-native'
 import {
   NativeBaseProvider,
-  ScrollView,
+  FlatList,
   Text,
   Pressable,
   Image,
   HStack,
+  VStack,
   View,
+  ScrollView,
 } from 'native-base'
+import { ListItemBase } from 'react-native-elements/dist/list/ListItemBase'
 
 let k = 0
 
@@ -111,115 +115,92 @@ let notify = [
 ]
 
 const Notification = ({ navigation }) => {
-  const makeList = () => {
-    let data = []
-    for (let i = 0; i < notify.length; i++) {
-      let subData = []
-      subData.push(
-        <Text
-          fontFamily={'Roboto_500Medium'}
-          fontSize={18}
-          lineHeight={21.48}
-          color='#7D7D7D'
-        >
-          {notify[i].title}
-          {'  '}
-          <Image
-            source={require('../assets/image/bigdot.png')}
-            size='9px'
-            alt='.'
-          />
-          <Text fontFamily={'Roboto_400Regular'}>
-            {'  '}
-            {notify[i].date}
-          </Text>
-        </Text>
-      )
-      let image
-      if (notify[i].type == 'Purchased')
-        image = (
-          <Image
-            source={require('../assets/image/purchasenotify.png')}
-            size='25px'
-            alt='p'
-            mt='15px'
-            mr='10px'
-          />
-        )
-      else
-        image = (
-          <Image
-            source={require('../assets/image/othernotify.png')}
-            alt='sr'
-            width='21.5px'
-            height='17.5px'
-            mt='18px'
-            mr='13px'
-          />
-        )
-      subData.push(
-        <HStack mb='20px'>
-          {image}
-          <View mt='8px'>
-            <Text
-              fontFamily={'OpenSans_400Regular'}
-              fontSize={18}
-              lineHeight={21.58}
-              color='#fff'
-            >
-              {notify[i].amount} {notify[i].unit} {notify[i].type}
-            </Text>
-            <Text
-              fontFamily={'OpenSans_400Regular'}
-              fontSize={14}
-              lineHeight={16.78}
-              color='#fff'
-              mt='3px'
-            >
-              {notify[i].address.slice(0, 5)}
-              {'...'}
-              {notify[i].address.slice(
-                notify[i].address.length - 5,
-                notify[i].address.length
-              )}
-            </Text>
-          </View>
-        </HStack>
-      )
-      data.push(subData)
-    }
-    return data
-  }
-
   return (
     <NativeBaseProvider>
-      <ScrollView backgroundColor='#000'>
-        <HStack alignSelf='center' mt='60px'>
-          <Pressable mr='54px' onPress={() => navigation.goBack()}>
+      <ScrollView bg='#000'>
+        <HStack alignSelf='center' mt='60px' mb='60px'>
+          <Pressable onPress={() => navigation.goBack()}>
             <Image
               size='18px'
               source={require('../assets/image/close.png')}
               alt='close'
             />
           </Pressable>
-          <Text
-            fontFamily={'Roboto_500Medium'}
-            fontSize={18}
-            lineHeight={21.48}
-            color='#fff'
-            textAlign='center'
-            width='200px'
-            mr='72px'
-          >
+          <Text style={styles.title} ml='60px' mr='78px'>
             NOTIFICATIONS
           </Text>
         </HStack>
-        <View mt='50px' ml='28px'>
-          {makeList()}
-        </View>
+        <FlatList
+          data={notify}
+          renderItem={({ item }) => (
+            <VStack ml='28px' mb='20px'>
+              <Text style={styles.subtitle}>
+                {item.title + '  '}
+                <Image
+                  source={require('../assets/image/bigdot.png')}
+                  size='9px'
+                  alt='dot'
+                />
+                {'  ' + item.date}
+              </Text>
+              <HStack mt='8px' alignItems='center'>
+                <Image
+                  source={require('../assets/image/coin.png')}
+                  size='25px'
+                  borderRadius='13px'
+                  alt='coin'
+                  mr='10px'
+                />
+                <VStack>
+                  <Text style={styles.history}>
+                    {item.amount + ' ' + item.unit + ' ' + item.type}
+                  </Text>
+                  <Text style={styles.address}>
+                    {item.address.slice(0, 5) +
+                      '...' +
+                      item.address.slice(
+                        item.address.length - 5,
+                        item.address.length
+                      )}
+                  </Text>
+                </VStack>
+              </HStack>
+            </VStack>
+          )}
+          keyExtractor={(item) => item.id}
+        />
       </ScrollView>
     </NativeBaseProvider>
   )
 }
+
+const styles = StyleSheet.create({
+  title: {
+    fontFamily: 'Roboto_500Medium',
+    fontSize: 18,
+    lineHeight: 21.48,
+    width: 200,
+    color: '#fff',
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontFamily: 'Roboto_500Medium',
+    fontSize: 18,
+    lineHeight: 21.48,
+    color: '#7D7D7D',
+  },
+  history: {
+    fontFamily: 'Nunito_400Regular',
+    fontSize: 18,
+    lineHeight: 24.55,
+    color: '#fff',
+  },
+  address: {
+    fontFamily: 'OpenSans_400Regular',
+    fontSize: 14,
+    lineHeight: 16.78,
+    color: '#fff',
+  },
+})
 
 export default Notification

@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+// import RNFS from 'react-native-fs'
 import {
   Checkbox,
   NativeBaseProvider,
@@ -13,11 +15,29 @@ import MainButton from '../../components/MainButton'
 
 const StepTwo = ({ navigation }) => {
   const [checked, setChecked] = useState(false)
+  let seeds = [
+    'crypto',
+    'binance',
+    'kingdom',
+    'prison',
+    'wisp',
+    'abandon',
+    'what',
+    'please',
+    'wallet',
+    'enable',
+    'else',
+    'if',
+  ]
+
+  // const getSeeds = async() => {
+  //   seeds = await axios
+  // }
 
   return (
     <NativeBaseProvider>
       <ScrollView backgroundColor='#000'>
-        <HStack mt='60' alignSelf='center'>
+        <HStack mt='60px' alignSelf='center'>
           <Pressable onPress={() => navigation.goBack()}>
             <Image
               alignSelf={'center'}
@@ -27,7 +47,7 @@ const StepTwo = ({ navigation }) => {
             />
           </Pressable>
           <Image
-            source={require('../../assets/image/step2.png')}
+            source={require('../../assets/image/step1.png')}
             alt='step'
             width='230px'
             mt='15px'
@@ -39,26 +59,23 @@ const StepTwo = ({ navigation }) => {
           fontSize={16}
           color='#62C9E8'
           lineHeight={24}
-          fontFamily={'Roboto_600SemiBold'}
+          fontFamily={'OpenSans_600SemiBold'}
           textAlign='center'
           mt='14px'
           mx='44px'
         >
           Backup Wallet
         </Text>
-        <Text
-          mt='311px'
-          fontSize={16}
-          lineHeight={24}
-          fontFamily={'Roboto_600SemiBold'}
-          textAlign='center'
-          mb='16px'
-          color='#fff'
-        >
-          Back up your wallet
-        </Text>
+        <Image
+          source={require('../../assets/image/backup.png')}
+          alt='logo'
+          width='229px'
+          height='251px'
+          alignSelf='center'
+        />
         <Text
           color='#7D8EA0'
+          mt='60px'
           mx='44px'
           fontSize={14}
           lineHeight={24}
@@ -98,14 +115,16 @@ const StepTwo = ({ navigation }) => {
           </Text>
         </HStack>
         <Pressable
-          isDisabled={!checked}
           mt='8px'
           mx='17px'
-          onPress={() => navigation.navigate('CreateWalletStepThree')}
+          onPress={() =>
+            navigation.navigate('CreateWalletStepThree', { seeds: seeds })
+          }
         >
           <MainButton data={'Backup Wallet'} />
         </Pressable>
         <Pressable
+          isDisabled={!checked}
           mt='32px'
           mb='39px'
           alignSelf='center'

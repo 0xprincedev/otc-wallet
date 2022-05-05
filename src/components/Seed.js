@@ -11,7 +11,7 @@ const Seed = ({ order, word }) => {
       my='4px'
       width='105px'
     >
-      {order}.<Text color='#000'>{word}</Text>
+      {order}. <Text color='#000'>{word}</Text>
     </Text>
   )
 }

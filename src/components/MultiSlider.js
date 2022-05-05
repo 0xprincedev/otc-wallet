@@ -42,7 +42,7 @@ const MultiSlider = ({ data }) => {
   }
 
   return (
-    <View width='250px' height='250px' borderRadius='125px'>
+    <View width='250px' height='250px' borderRadius='125px' alignSelf='center'>
       <View style={[{ alignItems: 'center', justifyContent: 'center' }]}>
         <Svg
           height='250'

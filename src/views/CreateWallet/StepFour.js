@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   NativeBaseProvider,
   Pressable,
@@ -13,41 +13,39 @@ import {
 
 import MainButton from '../../components/MainButton'
 
-let seedList = [
-  'call',
-  'waht',
-  'please',
-  'enable',
-  'talk',
-  'orphan',
-  'rose',
-  'either',
-  'kingdom',
-  'what',
-  'exhaust',
-  'please',
-]
+let clicked = []
+let cnt = 0
+const StepFour = ({ route, navigation }) => {
+  let rest = route.params.seeds
 
-let clickedList = []
-let k = 0
+  const [k, setK] = useState(cnt)
 
-const StepFour = ({ navigation }) => {
-  const [re, setRe] = useState()
+  const isSame = () => {
+    if (clicked.length < 12) return false
+    // for (let i = 0; i < 12; i++) {
+    //   if (check[i] != clicked[i]) {
+    //     return false
+    //   }
+    // }
+    return true
+  }
+
   const addSeed = (i) => {
-    clickedList.push(seedList[i])
-    seedList.splice(i, 1)
-    setRe(++k)
-  }
-  const deleteSeed = (i) => {
-    seedList.push(clickedList[i])
-    clickedList.splice(i, 1)
-    setRe(++k)
+    clicked.push(rest[i])
+    rest.splice(i, 1)
+    setK(++cnt)
   }
 
-  const makeSeedList = () => {
-    let seeds = []
-    for (let i = 0; i < seedList.length; i++) {
-      seeds.push(
+  const deleteSeed = (i) => {
+    rest.push(clicked[i])
+    clicked.splice(i, 1)
+    setK(++cnt)
+  }
+
+  const makeseedList = () => {
+    let seed = []
+    for (let i = 0; i < rest.length; i++) {
+      seed.push(
         <Pressable onPress={() => addSeed(i)}>
           <Badge
             mx='8px'
@@ -63,18 +61,18 @@ const StepFour = ({ navigation }) => {
               lineHeight={24}
               color='#fff'
             >
-              {seedList[i]}
+              {rest[i]}
             </Text>
           </Badge>
         </Pressable>
       )
     }
-    return seeds
+    return seed
   }
   const makeClickedList = () => {
-    let clicked = []
-    for (let i = 0; i < clickedList.length; i++) {
-      clicked.push(
+    let list = []
+    for (let i = 0; i < clicked.length; i++) {
+      list.push(
         <Pressable onPress={() => deleteSeed(i)}>
           <Badge
             mx='8px'
@@ -90,19 +88,19 @@ const StepFour = ({ navigation }) => {
               lineHeight={24}
               color='#4D4D4D'
             >
-              {clickedList[i]}
+              {clicked[i]}
             </Text>
           </Badge>
         </Pressable>
       )
     }
-    return clicked
+    return list
   }
   return (
     <NativeBaseProvider>
       <ScrollView backgroundColor='#000'>
         <HStack mt='60' alignSelf='center'>
-          <Pressable onPress={() => navigation.goBack()}>
+          <Pressable onPress={() => navigation.navigate('Home')}>
             <Image
               alignSelf={'center'}
               source={require('../../assets/image/back.png')}
@@ -123,7 +121,7 @@ const StepFour = ({ navigation }) => {
           fontSize={16}
           color='#62C7E9'
           lineHeight={24}
-          fontFamily={'Roboto_600SemiBold'}
+          fontFamily={'OpenSans_600SemiBold'}
           textAlign='center'
           mt='14px'
         >
@@ -164,9 +162,9 @@ const StepFour = ({ navigation }) => {
           px='6px'
           flexWrap='wrap'
         >
-          {makeSeedList()}
+          {makeseedList()}
         </View>
-        {seedList.length == 0 ? (
+        {isSame() ? (
           <Pressable
             mt='380px'
             mb='90px'

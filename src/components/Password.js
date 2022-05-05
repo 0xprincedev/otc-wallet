@@ -94,6 +94,7 @@ export default function Password() {
               secureTextEntry={passwordState}
               onChangeText={(e) => setPassword(e)}
               maxWidth='255'
+              keyboardType='phone-pad'
             />
           </VStack>
           <Pressable

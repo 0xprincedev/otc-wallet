@@ -12,35 +12,21 @@ import {
 import MainButton from '../../components/MainButton'
 import Seed from '../../components/Seed'
 
-let seed = [
-  'what',
-  'where',
-  'which',
-  'who',
-  'when',
-  'whether',
-  'if',
-  'else',
-  'enable',
-  'dynasty',
-  'kingdom',
-  'phrase',
-]
-
-const StepThree = ({ navigation }) => {
+const StepThree = ({ route, navigation }) => {
+  let { seeds } = route.params
   const makeSeedTable = () => {
-    let seeds = []
+    let table = []
     for (let i = 0; i < 12; i++) {
-      seeds.push(<Seed order={i + 1} word={seed[i]} key={i} />)
+      table.push(<Seed order={i + 1} word={seeds[i]} key={i} />)
     }
-    return seeds
+    return table
   }
 
   return (
     <NativeBaseProvider>
       <ScrollView backgroundColor='#000'>
         <HStack mt='60' alignSelf='center'>
-          <Pressable onPress={() => navigation.goBack()}>
+          <Pressable onPress={() => navigation.navigate('Home')}>
             <Image
               alignSelf={'center'}
               source={require('../../assets/image/back.png')}
@@ -49,7 +35,7 @@ const StepThree = ({ navigation }) => {
             />
           </Pressable>
           <Image
-            source={require('../../assets/image/step3.png')}
+            source={require('../../assets/image/step2.png')}
             alt='step'
             width='230px'
             mt='15px'
@@ -61,7 +47,7 @@ const StepThree = ({ navigation }) => {
           fontSize={16}
           color='#62C9E8'
           lineHeight={24}
-          fontFamily={'Roboto_600SemiBold'}
+          fontFamily={'OpenSans_600SemiBold'}
           textAlign='center'
           mt='14px'
         >
@@ -107,11 +93,7 @@ const StepThree = ({ navigation }) => {
           these 12 words are the keys to your wallet. Back them up on an
           external device or cloud. Do not share this with anyone.
         </Text>
-        <Pressable
-          mt='203px'
-          mx='17px'
-          onPress={() => navigation.navigate('CreateWalletStepFour')}
-        >
+        <Pressable mt='203px' mx='17px'>
           <MainButton data={'Backup to iCloud'} />
         </Pressable>
         <Pressable
@@ -127,6 +109,11 @@ const StepThree = ({ navigation }) => {
             fontFamily='Inter_700Bold'
             color='#5F97FF'
             textAlign='center'
+            onPress={() =>
+              navigation.navigate('CreateWalletStepFour', {
+                seeds: seeds.sort(),
+              })
+            }
           >
             Back up Manually
           </Text>

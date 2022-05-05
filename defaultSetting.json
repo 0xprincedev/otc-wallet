@@ -1,0 +1,64 @@
+{
+  "address": {
+    "exist": "false",
+    "private": "",
+    "public": ""
+  },
+  "security": {
+    "faceId": "",
+    "fingerPrint": "",
+    "pin": ""
+  },
+  "seed": ["", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+  "currency": {
+    "current": "USD",
+    "USD": {
+      "shortName": "USD",
+      "fullName": "USD - United States Dollar",
+      "unit": "$",
+      "uri": ""
+    },
+    "EUR": {
+      "shortName": "EUR",
+      "fullName": "EUR - Euro",
+      "unit": "€",
+      "uri": ""
+    },
+    "JPY": {
+      "shortName": "JPY",
+      "fullName": "JPY - Japanese Yen",
+      "unit": "¥",
+      "uri": ""
+    },
+    "BRZ": {
+      "shortName": "BRZ",
+      "fullName": "BRZ - Brazilian Real",
+      "unit": "R$",
+      "uri": ""
+    },
+    "CHF": {
+      "shortName": "CHF",
+      "fullName": "CHF - Swiss Franc",
+      "unit": "CHF",
+      "uri": ""
+    },
+    "AUD": {
+      "shortName": "AUD",
+      "fullName": "AUD - Australian Dollar",
+      "unit": "AUD$",
+      "uri": ""
+    },
+    "CNY": {
+      "shortName": "CNY",
+      "fullName": "CNY- Chinese Yaun",
+      "unit": "$",
+      "uri": "¥"
+    },
+    "CAD": {
+      "shortName": "CAD",
+      "fullName": "CAD- Canadian Dollar",
+      "unit": "CAD$",
+      "uri": ""
+    }
+  }
+}

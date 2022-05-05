@@ -49,8 +49,16 @@ const ImportWalletQrTwo = ({ navigation }) => {
         >
           Your QR Code has been scanned sucessfuly and wallet has been synced.
         </Text>
+        <Image
+          source={require('../../assets/image/backupcomplete.png')}
+          alt='backup'
+          width='310px'
+          height='254px'
+          mt='178px'
+          alignSelf='center'
+        />
         <Pressable
-          mt={'598px'}
+          mt='166px'
           mb='95px'
           mx='17px'
           onPress={() => navigation.navigate('MyWallet')}

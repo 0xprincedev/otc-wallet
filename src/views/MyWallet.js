@@ -7,7 +7,10 @@ import {
   View,
   Pressable,
   HStack,
+  FlatList,
+  Box,
 } from 'native-base'
+import { StyleSheet, LogBox } from 'react-native'
 import Swiper from 'react-native-swiper'
 
 import MultiSlider from '../components/MultiSlider'
@@ -27,7 +30,7 @@ let sliderData = [
     name: 'XRP',
     uri: '',
     price: '0.34',
-    percent: '1.5',
+    percent: '-1.5',
     stock: '1340.2',
     color: '#50AF95',
   },
@@ -51,12 +54,15 @@ let sliderData = [
 
 const MyWallet = ({ navigation }) => {
   const [tab, setTab] = useState(false)
+  useEffect(() => {
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested'])
+  }, [])
 
   const makeTabBar = () => {
     let data = (
       <HStack mx='39px' mt='22px' mb='20px'>
         <Pressable
-          // onPress={() => setTab(false)}
+          onPress={() => setTab(false)}
           pl='8px'
           borderBottomWidth={tab == false ? 2 : 1}
           borderBottomColor={tab == false ? '#3878D4' : '#fff'}
@@ -64,25 +70,21 @@ const MyWallet = ({ navigation }) => {
         >
           <Text
             color={tab == false ? '#3878D4' : '#fff'}
-            fontFamily={'OpenSans_400Regular'}
-            fontSize={18}
-            lineHeight={21.58}
+            style={styles.viewAreaTitle}
           >
             TOKENS
           </Text>
         </Pressable>
         <Pressable
-          // onPress={() => setTab(true)}
           width='50%'
           pr='8px'
           borderBottomWidth={tab == true ? 2 : 1}
           borderBottomColor={tab == true ? '#3878D4' : '#fff'}
+          onPress={() => navigation.navigate('NftGallery')}
         >
           <Text
             color={tab == true ? '#3878D4' : '#fff'}
-            fontFamily={'OpenSans_400Regular'}
-            fontSize={18}
-            lineHeight={21.58}
+            style={styles.viewAreaTitle}
             textAlign='right'
           >
             NFT's
@@ -92,27 +94,10 @@ const MyWallet = ({ navigation }) => {
     )
     return data
   }
-  const makeTokenList = () => {
-    let data = []
-    for (let i = 0; i < sliderData.length; i++) {
-      data.push(
-        <View
-          mx='17px'
-          mt='20px'
-          borderBottomWidth={'2px'}
-          key={i}
-          borderColor='#fff2'
-        >
-          <Token data={sliderData[i]} />
-        </View>
-      )
-    }
-    return data
-  }
 
   return (
     <NativeBaseProvider>
-      <ScrollView backgroundColor='#000'>
+      <ScrollView backgroundColor='#000' nestedScrollEnabled={true}>
         <Pressable
           onPress={() => navigation.navigate('Notification')}
           mt='66px'
@@ -124,35 +109,23 @@ const MyWallet = ({ navigation }) => {
             alt='notify'
           />
         </Pressable>
-        <Pressable
-          alignItems='center'
-          mt='40px'
-          onPress={() => navigation.navigate('Portfolio')}
-        >
+        <Pressable mt='40px' onPress={() => navigation.navigate('Portfolio')}>
           <MultiSlider data={sliderData} />
         </Pressable>
-        <Text
-          mt='20px'
-          fontFamily={'OpenSans_400Regular'}
-          color='#fff'
-          textAlign='center'
-          fontSize={18}
-          lineHeight={21.58}
-        >
+        <Text mt='20px' style={styles.portValue}>
           PORTFOLIO VALUE
         </Text>
         {makeTabBar()}
-        <Swiper
-          showsPagination={false}
-          loop={false}
-          onIndexChanged={() => {
-            setTab(!tab)
-          }}
-          height={'100%'}
-          // index={tab == true ? 1 : 0}
-        >
+        {tab == false ? (
           <View flex={1}>
-            {makeTokenList()}
+            {/* {makeTokenList()} */}
+            <FlatList
+              data={sliderData}
+              renderItem={({ item }) => (
+                <Token data={item} navigation={navigation} />
+              )}
+              keyExtractor={(item) => item.id}
+            />
             <Pressable
               height='65px'
               mx='7px'
@@ -162,23 +135,41 @@ const MyWallet = ({ navigation }) => {
               mt='16px'
               mb='33px'
               justifyContent='center'
+              onPress={() => navigation.navigate('AddAsset')}
             >
-              <Text
-                fontFamily={'Inter_400Regular'}
-                fontSize={18}
-                lineHeight={21.78}
-                color='#fff'
-                textAlign='center'
-              >
-                Add Assets
-              </Text>
+              <Text style={styles.addAsset}>Add Assets</Text>
             </Pressable>
           </View>
+        ) : (
           <View backgroundColor='#fff' flex={1}></View>
-        </Swiper>
+        )}
+        {/* <View backgroundColor='#fff' flex={1}></View> */}
+        {/* </Swiper> */}
       </ScrollView>
       <NavBar navigation={navigation} />
     </NativeBaseProvider>
   )
 }
+
+const styles = StyleSheet.create({
+  portValue: {
+    fontFamily: 'OpenSans_400Regular',
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 18,
+    lineHeight: 21.58,
+  },
+  viewAreaTitle: {
+    fontFamily: 'OpenSans_400Regular',
+    fontSize: 18,
+    lineHeight: 21.58,
+  },
+  addAsset: {
+    fontFamily: 'Inter_400Regular',
+    fontSize: 18,
+    lineHeight: 21.78,
+    color: '#fff',
+    textAlign: 'center',
+  },
+})
 export default MyWallet

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import AppLoading from 'expo-app-loading'
-import { NativeBaseProvider, Text } from 'native-base'
+import { NativeBaseProvider, Text, View } from 'native-base'
 
 import {
   useFonts,
@@ -9,7 +9,6 @@ import {
   Nunito_500Medium,
   Nunito_400Regular,
   Roboto_700Bold, //SF Compact
-  Roboto_600SemiBold,
   Roboto_500Medium,
   Roboto_400Regular,
   Archivo_700Bold,
@@ -22,7 +21,6 @@ import {
   Inter_400Regular,
   SourceSansPro_700Bold, //SF pro
   SourceSansPro_600SemiBold,
-  SourceSansPro_500Medium,
   SourceSansPro_400Regular,
   OpenSans_700Bold, //Futura
   OpenSans_600SemiBold,
@@ -40,7 +38,6 @@ const App = () => {
     Nunito_500Medium,
     Nunito_400Regular,
     Roboto_700Bold,
-    Roboto_600SemiBold,
     Roboto_500Medium,
     Roboto_400Regular,
     Archivo_700Bold,
@@ -53,32 +50,22 @@ const App = () => {
     Inter_400Regular,
     SourceSansPro_700Bold,
     SourceSansPro_600SemiBold,
-    SourceSansPro_500Medium,
     SourceSansPro_400Regular,
     OpenSans_700Bold,
     OpenSans_600SemiBold,
     OpenSans_500Medium,
     OpenSans_400Regular,
   })
-  // const [state, setState] = useState(0)
-  // useEffect(() => {
-  //   if (!fontsLoaded) {
-  //     setState(++state)
-  //   }
-  // })
-  // useEffect(() => {
-  //   setTimeout(() => {}, 1000)
-  // }, [])
+  const loadFont = () => {
+    for (let i = 0; i < 10000000; i++) {}
+    return (
+      <>
+        <StatusNav />
+        <Navigation />
+      </>
+    )
+  }
 
-  // if (!fontsLoaded) {
-  //   return <AppLoading />
-  // }
-
-  return (
-    <NativeBaseProvider>
-      <StatusNav />
-      <Navigation />
-    </NativeBaseProvider>
-  )
+  return <NativeBaseProvider>{loadFont()}</NativeBaseProvider>
 }
 export default App
